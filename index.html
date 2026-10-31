@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERO🩷✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe6e8, #ffb6c1);
+            color: #5a2a3a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* الوضع الليلي */
+        body.dark-mode {
+            background: linear-gradient(135deg, #0d050e, #1a091a);
+            color: #ffb6c1;
+        }
+
+        body.dark-mode .container {
+            background: rgba(20, 8, 22, 0.9);
+            border-color: #ff2a75;
+            box-shadow: 0 0 25px rgba(255, 42, 117, 0.6), inset 0 0 15px rgba(255, 42, 117, 0.2);
+        }
+
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode .song-title, 
+        body.dark-mode .photo-caption, 
+        body.dark-mode .timer-title, 
+        body.dark-mode .modal-content h3 {
+            color: #ff66a3 !important;
+            text-shadow: 0 0 8px rgba(255, 102, 163, 0.6);
+        }
+
+        body.dark-mode .caption {
+            color: #e0b0c8;
+        }
+
+        body.dark-mode .photo-card, 
+        body.dark-mode .music-card, 
+        body.dark-mode .modal-content, 
+        body.dark-mode .timer-box,
+        body.dark-mode .room-card {
+            background: #190a1c;
+            border-color: #ff3385 !important;
+            box-shadow: 0 0 15px rgba(255, 51, 133, 0.4);
+        }
+
+        body.dark-mode input[type="password"] {
+            background: #230d28;
+            color: #fff;
+            border-color: #ff3385;
+            box-shadow: 0 0 10px rgba(255, 51, 133, 0.3);
+        }
+
+        body.dark-mode button {
+            background: linear-gradient(45deg, #ff2a75, #ff66a3);
+            box-shadow: 0 0 15px rgba(255, 42, 117, 0.6);
+        }
+
+        /* زرار الدارك مود */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.85);
+            color: #d63384;
+            border: 2px solid #ffb6c1;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        body.dark-mode .theme-toggle-btn {
+            background: #230d28;
+            color: #ff85a2;
+            border-color: #ff3385;
+            box-shadow: 0 0 10px rgba(255, 51, 133, 0.5);
+        }
+
+        /* القلوب الطائرة */
+        .heart-bg {
+            position: fixed;
+            top: -10vh;
+            font-size: 20px;
+            color: #ff6b81;
+            opacity: 0.6;
+            animation: fall 5s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            border: 2px solid #ffb6c1;
+            z-index: 10;
+            margin: 20px 0;
+        }
+
+        #login-screen h2 {
+            color: #d63384;
+            margin-bottom: 15px;
+        }
+
+        input[type="password"] {
+            width: 80%;
+            padding: 12px;
+            border: 2px solid #ffb6c1;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff6b81, #ff85a2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 107, 129, 0.4);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #main-content {
+            display: none;
+        }
+
+        h1 {
+            color: #d63384;
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+
+        .caption {
+            font-size: 15px;
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .timer-card, .rooms-card, .music-card, .gallery-card {
+            background: #fff0f3;
+            padding: 15px;
+            border-radius: 18px;
+            border: 1px dashed #ff85a2;
+            margin-bottom: 20px;
+        }
+
+        .timer-title {
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .timer-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ffb6c1;
+            padding: 8px 10px;
+            border-radius: 12px;
+            min-width: 60px;
+            flex: 1;
+        }
+
+        .timer-num {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d63384;
+        }
+
+        body.dark-mode .timer-num {
+            color: #ff66a3;
+        }
+
+        .timer-label {
+            font-size: 11px;
+            color: #777;
+        }
+
+        /* الرومات المتعددة */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .room-card {
+            background: white;
+            border: 2px dashed #ff85a2;
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .room-card h4 {
+            color: #d63384;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .room-card small {
+            font-size: 10px;
+            color: #777;
+        }
+
+        /* بلاي ليست الأغاني */
+        .playlist-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .playlist-controls button {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        /* الجاليري الصغير المصغر */
+        .mini-gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .mini-gallery img {
+            width: 90px;
+            height: 90px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #ff85a2;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .mini-gallery img:hover {
+            transform: scale(1.08);
+        }
+
+        /* النافذة المنبثقة للصورة الكبيرة أو الرومات */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff9fa;
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px solid #ff85a2;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: right;
+            position: relative;
+        }
+
+        .modal-content img {
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ff6b81;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle-btn" onclick="toggleDarkMode()" id="themeBtn">🌙 Dark</button>
+
+    <!-- شاشة الباسورد -->
+    <div class="container" id="login-screen">
+        <h2>🩷BaNotY🩷</h2>
+        <p style="margin-bottom: 15px; color: #777;">Enter the password (123) 🩷✨</p>
+        <input type="password" id="pass-input" placeholder="Password">
+        <br>
+        <button onclick="checkPassword()">Enter🩷</button>
+        <p id="error-msg" style="color: red; margin-top: 10px; display: none;">اكتبِ الباسورد صح يروحي (123) 🌚🩷</p>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container" id="main-content">
+        <h1>🩷2026/09/16🩷</h1>
+        
+        <!-- العداد الأصلي -->
+        <div class="timer-card">
+            <div class="timer-title">بقالنا مع بعض🩷✨</div>
+            <div class="timer-grid">
+                <div class="timer-box"><div class="timer-num" id="years">0</div><div class="timer-label">سنة</div></div>
+                <div class="timer-box"><div class="timer-num" id="months">0</div><div class="timer-label">شهر</div></div>
+                <div class="timer-box"><div class="timer-num" id="days">0</div><div class="timer-label">يوم</div></div>
+                <div class="timer-box"><div class="timer-num" id="hours">0</div><div class="timer-label">ساعة</div></div>
+                <div class="timer-box"><div class="timer-num" id="minutes">0</div><div class="timer-label">دقيقة</div></div>
+                <div class="timer-box"><div class="timer-num" id="seconds">0</div><div class="timer-label">ثانية</div></div>
+            </div>
+        </div>
+
+        <!-- عداد رأس السنة -->
+        <div class="timer-card" style="background: #ffe0eb;">
+            <div class="timer-title">⏳ باقي ع رأس السنة وبقالنا (شهرين و17 يوم)</div>
+            <div class="timer-grid" id="newyear-countdown"></div>
+        </div>
+
+        <p class="caption">عملتلك المكان اللطيف ده عشان أقولك أد إيه انتِ حاجة خاصة جداً في حياتي 💕</p>
+
+        <!-- صناديق ورومات الذكريات (أكثر من روم) -->
+        <div class="rooms-card">
+            <div class="timer-title">💌 صناديق ورومات الذكريات</div>
+            <div class="rooms-grid">
+                <div class="room-card" onclick="openRoom('room1')">
+                    <h4>🎁 روم البداية</h4>
+                    <small>متاح دائماً</small>
+                </div>
+                <div class="room-card" onclick="openRoom('room2')">
+                    <h4>🎁 رسالة الشوق</h4>
+                    <small>متاحة دلوقتي ✨</small>
+                </div>
+                <div class="room-card" onclick="openRoom('room3')">
+                    <h4>🎁 صندوق الضحكة</h4>
+                    <small>متاح دائماً 🥰</small>
+                </div>
+                <div class="room-card" onclick="openRoom('room4')">
+                    <h4>🎁 روم رأس السنة</h4>
+                    <small>يفتح 31/12/2026 🌙</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- بلاي ليست الأغاني (أكثر من أغنية) -->
+        <div class="music-card">
+            <div class="song-title" id="song-title-display">Music Playlist 🎶</div>
+            <audio id="playlistAudio"></audio>
+            <div class="playlist-controls">
+                <button onclick="prevSong()">⏮ السابق</button>
+                <button onclick="toggleMusic()" id="musicBtn">Play 🩷</button>
+                <button onclick="nextSong()">التالي ⏭</button>
+            </div>
+        </div>
+
+        <!-- جاليري الصور المصغر (Gallery Carousel) -->
+        <div class="gallery-card">
+            <div class="timer-title">📸 ألبوم الصور المصغر</div>
+            <div class="mini-gallery">
+                <img src="photo1.jpg" onclick="openPhoto('photo1.jpg', 'قمري🌚🩷')" alt="1">
+                <img src="photo2.jpg" onclick="openPhoto('photo2.jpg', 'احلي ضحكه شوفتها في حياتي🩷✨')" alt="2">
+                <img src="photo3.jpg" onclick="openPhoto('photo3.jpg', 'ربنا يخليكي ليا دايماً ✨')" alt="3">
+                <img src="photo4.jpg" onclick="openPhoto('photo4.jpg', 'الصغنن حجي🌚🩷')" alt="4">
+                <img src="photo5.jpg" onclick="openPhoto('photo5.jpg', '🩷✨احلي بنوته في الدنيا دي كلها')" alt="5">
+            </div>
+        </div>
+
+        <button onclick="openNote()">Note 💌</button>
+    </div>
+
+    <!-- نافذة عامة (للنوتة أو الرومات) -->
+    <div class="modal" id="genericModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title" style="color: #d63384; margin-bottom: 10px;"></h3>
+            <div id="modal-body" style="line-height: 1.6; color: #444; font-size: 14px; white-space: pre-line;"></div>
+        </div>
+    </div>
+
+    <!-- نافذة عرض الصورة المكبرة -->
+    <div class="modal" id="photoModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePhotoModal()">&times;</span>
+            <h3 id="photo-modal-caption" style="color: #d63384; margin-bottom: 10px;"></h3>
+            <img id="modal-img-src" src="" alt="Zoomed Photo">
+        </div>
+    </div>
+
+    <script>
+        const PASSWORD = "M♡R"; // تقدر تغيرها براحتك
+
+        function checkPassword() {
+            const input = document.getElementById('pass-input').value;
+            if (input === PASSWORD) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                startTimer();
+                loadSong();
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+
+        // --- نظام بلاي ليست الأغاني ---
+        const playlist = [
+            { title: "Music 1: Youm Matablan 🩷", src: "song.mp3" },
+            { title: "Music 2: Romantic Melodies ✨", src: "song2.mp3" }, // حط مسار الأغنية الثانية
+            { title: "Music 3: Our Special Vibe 🎶", src: "song3.mp3" }  // حط مسار الأغنية التالتة
+        ];
+        let currentSongIndex = 0;
+        const audio = document.getElementById('playlistAudio');
+        const musicBtn = document.getElementById('musicBtn');
+        const songTitleDisplay = document.getElementById('song-title-display');
+
+        function loadSong() {
+            audio.src = playlist[currentSongIndex].src;
+            songTitleDisplay.innerText = playlist[currentSongIndex].title;
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.innerText = "⏸ إيقاف";
+            } else {
+                audio.pause();
+                musicBtn.innerText = "Play 🩷";
+            }
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            loadSong();
+            audio.play();
+            musicBtn.innerText = "⏸ إيقاف";
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+            loadSong();
+            audio.play();
+            musicBtn.innerText = "⏸ إيقاف";
+        }
+
+        // --- نظام النوتة والرومات المتعددة ---
+        function openNote() {
+            document.getElementById('modal-title').innerText = "To my soul 📝❤️";
+            document.getElementById('modal-body').innerText = `بصي بقا 🩷✨\nبقالنا فتره صغنن مع بعض بس بقينا اقرب اتنين لبعض و دخلنا قلب بعض بسرعه عشان شبه بعض في كل حاجه و زي بعض ف كل حاجه و دخلتي قلبي بجد 🩷✨\nيارب دايما مع بعض يصغنن و دائماً مبسوطين سوا ✨🩷\nRT07🩷✨`;
+            document.getElementById('genericModal').style.display = 'flex';
+        }
+
+        const roomData = {
+            room1: { title: "🎁 روم البداية", text: "يا ريضووو يا حتة من قلبي، يا أجمل نصيب وأحنّ صدفة وأغلى حد على روحي كلها... إنتِ دخلتي حياتي غيرتي كل حاجة فيها للأجمل! 🩷✨" },
+            room2: { title: "🎁 رسالة الشوق", text: "مهما كانت المسافة بيننا 650 كيلو أو أكل, قلبي حاسس بيكي وفي كل دقة بينادي اسمك يا أحلي بنوتة في الدنيا 💕" },
+            room3: { title: "🎁 صندوق الضحكة والذكريات", text: "فاكر كل ضحكة وكل كلمة لطيفة بينا؟ إنتي خليتي أيامي ليها طعم تاني خالص يا قمري 🌚🩷" },
+            room4: { title: "🎁 مفاجأة رأس السنة (31/12)", text: "كل سنة وأنتي طيبة يا قمري! خلاص دخلنا السنة الجديدة وبقينا مع بعض شهرين و17 يوم، ولسه الحكاية بتكبر بينا 🩷✨" }
+        };
+
+        function openRoom(roomId) {
+            if (roomId === 'room4') {
+                const now = new Date();
+                const targetDate = new Date('2026-12-31T00:00:00');
+                if (now < targetDate) {
+                    alert('عفواً يا يروحي! الروم ده مقفول وهيففتح لوحده يوم 31/12/2026 ان شاء الله 🌙🩷');
+                    return;
+                }
+            }
+            document.getElementById('modal-title').innerText = roomData[roomId].title;
+            document.getElementById('modal-body').innerText = roomData[roomId].text;
+            document.getElementById('genericModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('genericModal').style.display = 'none';
+        }
+
+        // --- جاليري الصور المصغر ---
+        function openPhoto(imgSrc, caption) {
+            document.getElementById('photo-modal-caption').innerText = caption;
+            document.getElementById('modal-img-src').src = imgSrc;
+            document.getElementById('photoModal').style.display = 'flex';
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // --- الوضع الليلي ---
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const themeBtn = document.getElementById('themeBtn');
+            if (document.body.classList.contains('dark-mode')) {
+                themeBtn.innerHTML = "☀️ Light";
+            } else {
+                themeBtn.innerHTML = "🌙 Dark";
+            }
+        }
+
+        // --- العدادات الزمنية ---
+        const startDate = new Date('2026-09-16T00:00:00');
+
+        function updateTimer() {
+            const now = new Date();
+            let diff = now - startDate;
+            if (diff < 0) diff = 0;
+
+            const seconds = Math.floor((diff / 1000) % 60);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            document.getElementById('years').innerText = years < 0 ? 0 : years;
+            document.getElementById('months').innerText = months < 0 ? 0 : months;
+            document.getElementById('days').innerText = days < 0 ? 0 : days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+
+            const targetNewYear = new Date('2026-12-31T00:00:00');
+            let nyDiff = targetNewYear - now;
+            if (nyDiff < 0) nyDiff = 0;
+
+            const nyDays = Math.floor(nyDiff / (1000 * 60 * 60 * 24));
+            const nyHours = Math.floor((nyDiff / (1000 * 60 * 60)) % 24);
+            const nyMinutes = Math.floor((nyDiff / 1000 / 60) % 60);
+            const nySeconds = Math.floor((nyDiff / 1000) % 60);
+
+            document.getElementById('newyear-countdown').innerHTML = `
+                <div class="timer-box"><div class="timer-num">${nyDays}</div><div class="timer-label">يوم</div></div>
+                <div class="timer-box"><div class="timer-num">${nyHours}</div><div class="timer-label">ساعة</div></div>
+                <div class="timer-box"><div class="timer-num">${nyMinutes}</div><div class="timer-label">دقيقة</div></div>
+                <div class="timer-box"><div class="timer-num">${nySeconds}</div><div class="timer-label">ثانية</div></div>
+            `;
+        }
+
+        function startTimer() {
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerText = ['💖', '🌸', '✨', '💕', '🌷'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHearts, 400);
+    </script>
+</body>
+</html>
